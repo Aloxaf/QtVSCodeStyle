@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import re
-from distutils.version import StrictVersion
+from packaging import version as Version
 from enum import Enum
 from importlib import resources
 from pathlib import Path
@@ -101,7 +101,7 @@ def _apply_application_patches(colors: dict[str, Optional[Color]]) -> None:
         _logger.warning(BASE_LOG_MESSAGE)
         return
     if __version__ is not None:
-        if StrictVersion(__version__) >= StrictVersion("6.0"):
+        if Version.parse(__version__) >= Version.parse("6.0"):
             _logger.info("In qt6, placeholder color for various text input widgets is not applied due to a bug.")
             return
 
